@@ -1,0 +1,35 @@
+{
+  "name": "coaction",
+  "version": "0.1.0",
+  "description": "Transactional use of multiple resources",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivolucien/coaction.git"
+  },
+  "keywords": [
+    "transaction",
+    "cross",
+    "database",
+    "cache",
+    "commit",
+    "rollback"
+  ],
+  "author": "Ivo Havener",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ivolucien/coaction/issues"
+  },
+  "homepage": "https://github.com/ivolucien/coaction#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint-standard": "^1.0.2",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "eslint": "^5.5.0"
+  }
+}
