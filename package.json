@@ -4,7 +4,8 @@
   "description": "Transactional use of multiple resources",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/*"
+    "test": "mocha ./test/*",
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -23,13 +24,17 @@
   "bugs": {
     "url": "https://github.com/ivolucien/coaction/issues"
   },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  },
   "homepage": "https://github.com/ivolucien/coaction#readme",
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint-standard": "^1.0.2",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "standard": "^12.0.1"
   },
-  "dependencies": {
-    "eslint": "^5.5.0"
-  }
+  "dependencies": {}
 }
