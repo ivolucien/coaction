@@ -2,11 +2,19 @@
 
 class Db {
   constructor () {
-    this.state = 'none' // 'committed', 'rolledback'
+    this.state = 'none' // 'transacting', 'committed', 'rolledback'
+  }
+
+  transaction () {
+    if (this.state !== 'none') {
+      throw Error('Unsupported request for state: ' + this.state)
+    }
+    this.state = 'transacting'
+    return Promise.resolve()
   }
 
   commit () {
-    if (this.state === 'rolledback') {
+    if (this.state !== 'transacting') {
       throw Error('Unsupported request for state: ' + this.state)
     }
     this.state = 'committed'
@@ -14,7 +22,7 @@ class Db {
   }
 
   rollback () {
-    if (this.state === 'committed') {
+    if (this.state !== 'transacting') {
       throw Error('Unsupported request for state:' + this.state)
     }
     this.state = 'rolledback'

@@ -35,12 +35,36 @@ describe('CoAction', function () {
     })
   })
 
+  // @todo: consolidate '#transaction', '#commit' and 'rollback' contexts into one loop?
+  context('#transaction', function () {
+    context('when initialized with a source client', function () {
+      const sources = { mockA: new Db() }
+      it('should delegate to that client', async function () {
+        const co = new CoAction(sources)
+        expect(co).to.have.property('transaction')
+        await co.transaction()
+        expect(co.sources.mockA.state).to.equal('transacting')
+      })
+    })
+
+    context('when initialized with multiple source clients', function () {
+      const sources = { mockA: new Db(), mockB: new Db() }
+      it('should start a new transaction for all clients', async function () {
+        const co = new CoAction(sources)
+        await co.transaction()
+        expect(co.sources.mockA.state).to.equal('transacting', 'mockA')
+        expect(co.sources.mockB.state).to.equal('transacting', 'mockB')
+      })
+    })
+  })
+
   context('#commit', function () {
     context('when initialized with a source client', function () {
       const sources = { mockA: new Db() }
       it('should delegate to that client', async function () {
         const co = new CoAction(sources)
         expect(co).to.have.property('commit')
+        await co.transaction()
         await co.commit()
         expect(co.sources.mockA.state).to.equal('committed')
       })
@@ -50,6 +74,7 @@ describe('CoAction', function () {
       const sources = { mockA: new Db(), mockB: new Db() }
       it('should commit all clients', async function () {
         const co = new CoAction(sources)
+        await co.transaction()
         await co.commit()
         expect(co.sources.mockA.state).to.equal('committed', 'mockA')
         expect(co.sources.mockB.state).to.equal('committed', 'mockB')
@@ -63,6 +88,7 @@ describe('CoAction', function () {
       it('should delegate to that client', async function () {
         const co = new CoAction(sources)
         expect(co).to.have.property('rollback')
+        await co.transaction()
         await co.rollback()
         expect(co.sources.mockA.state).to.equal('rolledback')
       })
@@ -72,6 +98,7 @@ describe('CoAction', function () {
       const sources = { mockA: new Db(), mockB: new Db() }
       it('should rollback all clients', async function () {
         const co = new CoAction(sources)
+        await co.transaction()
         await co.rollback()
         expect(co.sources.mockA.state).to.equal('rolledback', 'mockA')
         expect(co.sources.mockB.state).to.equal('rolledback', 'mockB')
