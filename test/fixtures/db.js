@@ -2,7 +2,7 @@
 
 class Db {
   constructor () {
-    this.state = 'none' // 'transacting', 'committed', 'rolledback'
+    this.state = 'none' // 'transacting', 'committed', 'rolled_back'
   }
 
   transaction () {
@@ -25,7 +25,7 @@ class Db {
     if (this.state !== 'transacting') {
       throw Error('Unsupported request for state:' + this.state)
     }
-    this.state = 'rolledback'
+    this.state = 'rolled_back'
     return Promise.resolve()
   }
 }

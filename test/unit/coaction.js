@@ -4,7 +4,7 @@ const CoAction = require('../../lib/coaction')
 const expect = require('chai').expect
 const Db = require('../fixtures/db')
 
-// CoAction helps keep data from multiple sources synchronized
+// CoAction helps keep data in multiple data repositories synchronized
 // This class just manages clients
 describe('CoAction', function () {
   context('#constructor', function () {
@@ -93,7 +93,7 @@ describe('CoAction', function () {
         expect(co).to.have.property('rollback')
         await co.transaction()
         await co.rollback()
-        expect(co.clients.mockA.state).to.equal('rolledback')
+        expect(co.clients.mockA.state).to.equal('rolled_back')
       })
     })
 
@@ -103,8 +103,8 @@ describe('CoAction', function () {
         const co = new CoAction(clients)
         await co.transaction()
         await co.rollback()
-        expect(co.clients.mockA.state).to.equal('rolledback', 'mockA')
-        expect(co.clients.mockB.state).to.equal('rolledback', 'mockB')
+        expect(co.clients.mockA.state).to.equal('rolled_back', 'mockA')
+        expect(co.clients.mockB.state).to.equal('rolled_back', 'mockB')
       })
     })
   })
