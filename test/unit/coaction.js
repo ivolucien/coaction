@@ -2,17 +2,16 @@
 
 const CoAction = require('../../lib/coaction')
 const expect = require('chai').expect
-const Db = require('../fixtures/db')
+const MockDb = require('../fixtures/db')
 
 // CoAction helps keep data in multiple data repositories synchronized
 // This class just manages clients
 describe('CoAction', function () {
   context('#constructor', function () {
-    const db = new Db()
+    const db = new MockDb()
     const map = { mock: db }
     context('with no arguments', function () {
       it('should contain an empty list', function () {
-        console.log('@todo: add proper logger support')
         const co = new CoAction()
         expect(co).to.be.an('object')
         expect(co.size).to.equal(0, 'size')
@@ -41,7 +40,7 @@ describe('CoAction', function () {
   // @todo: consolidate '#transaction', '#commit' and 'rollback' contexts into one loop?
   context('#transaction', function () {
     context('when initialized with a client', function () {
-      const clients = { mockA: new Db() }
+      const clients = { mockA: new MockDb() }
       it('should delegate to that client', async function () {
         const co = new CoAction(clients)
         expect(co).to.have.property('transaction')
@@ -51,7 +50,7 @@ describe('CoAction', function () {
     })
 
     context('when initialized with multiple clients', function () {
-      const clients = { mockA: new Db(), mockB: new Db() }
+      const clients = { mockA: new MockDb(), mockB: new MockDb() }
       it('should start a new transaction for all clients', async function () {
         const co = new CoAction(clients)
         await co.transaction()
@@ -63,7 +62,7 @@ describe('CoAction', function () {
 
   context('#commit', function () {
     context('when initialized with a client', function () {
-      const clients = { mockA: new Db() }
+      const clients = { mockA: new MockDb() }
       it('should delegate to that client', async function () {
         const co = new CoAction(clients)
         expect(co).to.have.property('commit')
@@ -74,7 +73,7 @@ describe('CoAction', function () {
     })
 
     context('when initialized with multiple clients', function () {
-      const clients = { mockA: new Db(), mockB: new Db() }
+      const clients = { mockA: new MockDb(), mockB: new MockDb() }
       it('should commit all clients', async function () {
         const co = new CoAction(clients)
         await co.transaction()
@@ -87,7 +86,7 @@ describe('CoAction', function () {
 
   context('#rollback', function () {
     context('when initialized with a client', function () {
-      const clients = { mockA: new Db() }
+      const clients = { mockA: new MockDb() }
       it('should delegate to that client', async function () {
         const co = new CoAction(clients)
         expect(co).to.have.property('rollback')
@@ -98,7 +97,7 @@ describe('CoAction', function () {
     })
 
     context('when initialized with multiple clients', function () {
-      const clients = { mockA: new Db(), mockB: new Db() }
+      const clients = { mockA: new MockDb(), mockB: new MockDb() }
       it('should rollback all clients', async function () {
         const co = new CoAction(clients)
         await co.transaction()

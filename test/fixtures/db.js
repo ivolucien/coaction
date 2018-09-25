@@ -1,6 +1,6 @@
 'use strict'
 
-class Db {
+class MockDb {
   constructor () {
     this.state = 'none' // 'transacting', 'committed', 'rolled_back'
   }
@@ -30,4 +30,4 @@ class Db {
   }
 }
 
-module.exports = Db
+module.exports = MockDb
