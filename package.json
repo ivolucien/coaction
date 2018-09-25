@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "description": "Transactional use of multiple resources",
   "main": "index.js",
+  "engines" : {
+    "node" : ">=7.10"
+  },
   "scripts": {
     "test": "mocha ./test/*",
+    "testUnit": "mocha ./test/unit/*",
+    "testInteg": "mocha ./test/integ/*",
     "lint": "standard"
   },
   "repository": {
@@ -34,6 +39,7 @@
     "chai": "^4.1.2",
     "eslint-standard": "^1.0.2",
     "mocha": "^5.2.0",
+    "mysql2": "^1.6.1",
     "standard": "^12.0.1"
   },
   "dependencies": {}
