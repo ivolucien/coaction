@@ -3,7 +3,9 @@
 const CoAction = require('../../lib/coaction')
 const expect = require('chai').expect
 const MockDb = require('../fixtures/db')
+const log = require('../../lib/log')()
 
+log.setLevel('debug')
 // CoAction helps keep data in multiple data repositories synchronized
 // This class just manages clients
 describe('CoAction', function () {

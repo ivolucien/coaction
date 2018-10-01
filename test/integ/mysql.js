@@ -3,6 +3,9 @@
 const CoAction = require('../../lib/coaction')
 const expect = require('chai').expect
 const DbWrapper = require('../fixtures/mysql')
+const log = require('../../lib/log')()
+
+log.setLevel('debug')
 
 describe('CoAction integration #mysql', function () {
   let db
