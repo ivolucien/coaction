@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "Transactional use of multiple resources",
   "main": "index.js",
-  "engines" : {
-    "node" : ">=7.10"
+  "engines": {
+    "node": ">=7.10"
   },
   "scripts": {
     "test": "mocha ./test/*",
@@ -42,5 +42,7 @@
     "mysql2": "^1.6.1",
     "standard": "^12.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "loglevel": "^1.6.1"
+  }
 }
