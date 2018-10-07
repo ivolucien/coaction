@@ -3,7 +3,7 @@
 const CoAction = require('../../lib/coaction')
 const expect = require('chai').expect
 const MockDb = require('../fixtures/db')
-const log = require('../../lib/log')()
+const log = require('../../lib/log').logger
 
 log.setLevel('debug')
 // CoAction helps keep data in multiple data repositories synchronized
