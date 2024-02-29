@@ -2,9 +2,9 @@
 
 **coaction** is a container for clients that you wish to manage as a distributed transaction.
 
-## `Unreleased PRE-ALPHA status`
+## **INACTIVE** `Unreleased project, other priorities`
 
-I am humbled, participating fully in a family with children. Until you see a release version, please consider this project somewhere between a pipe dream and hubris.
+If anyone is interested in taking over this fledgling project please message me. I do not expect to work on it again, barring the unexpected.
 
 ## Project Goal
 
